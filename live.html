@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>videojs-contrib-hls embed</title>
+  
+  <!--
+
+  Uses the latest versions of video.js and videojs-http-streaming.
+
+  To use specific versions, please change the URLs to the form:
+
+  <link href="https://unpkg.com/video.js@6.7.1/dist/video-js.css" rel="stylesheet">
+  <script src="https://unpkg.com/video.js@6.7.1/dist/video.js"></script>
+  <script src="https://unpkg.com/@videojs/http-streaming@0.9.0/dist/videojs-http-streaming.js"></script>
+
+  -->
+
+  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+  <script src="https://unpkg.com/video.js/dist/video.js"></script>
+  <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+</head>
+<body>
+  <h1>Video.js Example Embed</h1>
+
+  <video-js id="my_video_1" class="vjs-default-skin" controls overrideNative=true preload="auto" width="640" height="268">
+    <!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8" type="application/x-mpegURL"> -->
+    <source src="/mu8/index.m3u8" type="application/x-mpegURL">
+      <!-- <source src="/output.mp4" type="video/mp4"> -->
+  </video-js>
+  
+ <!-- <script src="https://unpkg.com/video.js/dist/video.js"></script> -->
+  <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
+  
+  <script>
+    var overrideNative = false;
+	  var player = videojs('my_video_1', {html5: {
+            hls: {
+                withCredentials: true,
+                overrideNative: true
+            }
+          }});
+    player.ready(function(){
+      console.log('ojojojo');
+      var myPlayer = this;
+      myPlayer.play();
+      myPlayer.on("pause", function () {
+        console.log('jokee');
+        myPlayer.reset();
+        myPlayer.one("play", function () { 
+          myPlayer.src({"type":myPlayer.currentType(), "src":myPlayer.currentSrc()});
+          myPlayer.play(); 
+        });
+      });
+      myPlayer.on("play", function () {
+        console.log('playindd');
+        // myPlayer.load ();
+      });
+      myPlayer.on("ended", function () {
+        console.log('ended');
+        // myPlayer.load ();
+      });
+      myPlayer.on("error", function () {
+        console.log('error');
+        // myPlayer.load ();
+      });
+      myPlayer.on("waiting", function () {
+        console.log('waiting');
+        // myPlayer.load ();
+      });
+      myPlayer.on("emptied", function () {
+        console.log('emptied');
+        // myPlayer.load ();
+      });
+    });
+  </script>
+  
+</body>
+</html>

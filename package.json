@@ -1,0 +1,16 @@
+{
+  "name": "live",
+  "version": "1.0.0",
+  "description": "Live module",
+  "main": "live_loop.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "stream-throttle": "^0.1.3"
+  }
+}
